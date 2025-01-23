@@ -11,3 +11,5 @@ const authors =
       "bio": "English novelist, essayist, journalist, and critic."
     }
 ]
+
+module.exports = authors;
