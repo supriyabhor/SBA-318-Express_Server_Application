@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-const authors = require("./data/authors");
-const books = require("./data/books");
 
 const authorsRouter = require("./routes/authors");
 const booksRouter = require("./routes/books");
+const reviewsRouter = require("./routes/reviews");
 
 app.use("/authors", authorsRouter);
+app.use("/books", booksRouter);
+app.use("/reviews", reviewsRouter);
 
 
 // app.get("/", (req, res) => {
