@@ -69,7 +69,6 @@ reviewsRouter.delete("/:id", (req, res, next) => {
          }
          
       })
-   //   console.log(review);
       if (review) res.json(review);
       else next();
  })
