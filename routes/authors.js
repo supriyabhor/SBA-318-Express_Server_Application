@@ -28,16 +28,50 @@ authorsRouter.post("/", (req, res) => {
         //push the new author 
         authors.push(newAuthor);
 
-        res.status(201).json(authors[authors.length - 1]); // Send the newly created author
+        res.json(authors[authors.length - 1]);
       
     }else
     {
-        res.status(400).json({ error: "Insufficient data" });  // Handle the error case
+        res.json({ error: "Insufficient Data" });
     }
         
 })
 
 
+//PATCH
+
+authorsRouter.patch("/:id", (req, res, next) => {
+    console.log(req.body);
+   const author = authors.find((author, i) => {
+    if (author.id === Number(req.params.id)) {
+        for (const key in req.body)
+        {
+            authors[i][key] = req.body[key];
+        }
+        return true;
+    }
+   })
+ if(author)  res.json(author);
+
+ else next(); 
+})
+
+//DELETE
+authorsRouter.delete("/:id", (req, res, next) => {
+
+   const author = authors.find((author, i) => {
+     console.log(author);
+        if(author.id === Number( req.params.id))
+        {
+            authors.splice(i,1);
+            return true;
+        }
+        
+     })
+  //   console.log(author);
+     if (author) res.json(author);
+     else next();
+})
 
 
 module.exports = authorsRouter;

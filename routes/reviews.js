@@ -38,4 +38,40 @@ reviewsRouter.post("/", (req, res) => {
 })
 
 
+//PATCH
+
+reviewsRouter.patch("/:id", (req, res, next) => {
+    console.log(req.body);
+   const review = reviews.find((review, i) => {
+    if (review.id === Number(req.params.id)) {
+        for (const key in req.body)
+        {
+            reviews[i][key] = req.body[key];
+        }
+        return true;
+    }
+   })
+
+ if(review)  res.json(review);
+
+ else next(); 
+})
+
+//DELETE
+reviewsRouter.delete("/:id", (req, res, next) => {
+
+    const review = reviews.find((review, i) => {
+      console.log(review);
+         if(review.id === Number( req.params.id))
+         {
+             reviews.splice(i,1);
+             return true;
+         }
+         
+      })
+   //   console.log(review);
+      if (review) res.json(review);
+      else next();
+ })
+
 module.exports = reviewsRouter;
